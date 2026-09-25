@@ -1,25 +1,18 @@
 import http from "node:http";
-import readAbout from "./js/about/about.js";
+import { displayError, displayPage } from "./js/displayPage.js";
 
-const PORT = 9000;
-
-console.log(`Running in localhost:${PORT}`);
+const PORT = 8000;
 
 const server = http.createServer((req, res) => {
-  try {
-    if (req.method === "GET" && req.url === "/") {
-      res.end("Home");
-    } else if (req.method === "GET" && req.url === "/about") {
-      readAbout(res);
-    } else if (req.method === "GET" && req.url === "/contact") {
-      res.end("Contact");
-    } else {
-      res.statusCode = 404;
-      throw new Error("404 Page not found");
-    }
-  } catch {
-    res.end("404");
+  if (req.method === "GET" && req.url === "/") {
+    displayPage(res, "index");
+  } else if (req.method === "GET" && req.url === "/about") {
+    displayPage(res, "about");
+  } else if (req.method === "GET" && req.url === "/contact") {
+    displayPage(res, "contact");
   }
+  res.statusCode = 404;
+  displayError(res);
 });
 
 server.listen(PORT);
