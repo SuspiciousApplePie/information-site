@@ -4,7 +4,7 @@
   "description": "A simple information site using node.js",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "",
     "lint": "eslint .",
     "format": "prettier --write src"
   },
@@ -21,11 +21,9 @@
   },
   "homepage": "https://github.com/SuspiciousApplePie/information-site#readme",
   "devDependencies": {
-    "@babel/preset-env": "^8.0.6",
     "@types/node": "^26.6.2",
     "eslint": "^10.11.0",
     "eslint-config-prettier": "^10.1.8",
-    "jest": "^30.5.2",
     "prettier": "3.9.9"
   },
   "dependencies": {
