@@ -1,18 +1,29 @@
-import http from "node:http";
 import { displayError, displayPage } from "./js/displayPage.js";
 
-const PORT = 8000;
+import express from "express";
 
-const server = http.createServer((req, res) => {
-  if (req.method === "GET" && req.url === "/") {
-    displayPage(res, "index");
-  } else if (req.method === "GET" && req.url === "/about") {
-    displayPage(res, "about");
-  } else if (req.method === "GET" && req.url === "/contact") {
-    displayPage(res, "contact");
-  }
-  res.statusCode = 404;
+const app = express();
+
+const PORT = 3000;
+
+app.get("/", (req, res) => {
+  displayPage(res, "index");
+});
+
+app.get("/about", (req, res) => {
+  displayPage(res, "about");
+});
+
+app.get("/contact", (req, res) => {
+  displayPage(res, "contact");
+});
+
+app.use((req, res) => {
   displayError(res);
 });
 
-server.listen(PORT);
+app.listen(PORT, (error) => {
+  if (error) {
+    throw error;
+  }
+});

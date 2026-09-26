@@ -2,17 +2,17 @@ import fs from "node:fs";
 
 function displayPage(res, pageName) {
   fs.readFile(`src/templates/${pageName}.html`, "utf-8", (error, data) => {
-    if (!error) return res.end(data);
+    if (!error) return res.send(data);
   });
 }
 
 function displayError(res) {
   fs.readFile("src/templates/404.html", "utf-8", (error, data) => {
     if (error) {
-      res.statusCode = 500;
+      res.statusCode = 400;
       res.end("Something went wrong.");
     }
-    res.end(data);
+    res.status(404).end(data);
   });
 }
 
